@@ -1,12 +1,27 @@
 const shared = {
+  runner: null,
 }
+
+const PENDING_TEST_FUNCTION = () => {}
 
 export function createRunner () {
   let runner;
   runner = {
-    root: null,
+    current: null,
+    only: [],
+    root: createTest ({ name: 'root test' }),
   }
   return runner;
+}
+
+export function createTest (details = {}) {
+  let { name = '', func = PENDING_TEST_FUNCTION } = details;
+  let test;
+  test = {
+    name,
+    func,
+    children: [],
+  }
 }
 
 export function getRunner () {
@@ -20,8 +35,9 @@ export function getRunner () {
 }
 
 export function describe (name, func) {
-  let runner;
+  let runner, test;
   runner = getRunner ();
+  test = createTest ();
   runner.current [name] = func;
 }
 

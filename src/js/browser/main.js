@@ -1,30 +1,8 @@
-import { expect, run, specs } from '@/common/index.js';
+import { run } from '@/common/index.js';
+import '@/common/index.spec.js';
 import './index.css';
 
 function start () {
-  specs ({
-    'sample spec 1': {
-      // 'before all': () => {},
-      // 'before each': () => {},
-      // 'after all': () => {},
-      // 'after each': () => {},
-      'sample spec 1/1': () => {
-        expect (1).is (1)
-      },
-      'sample spec 1/2': async () => {
-        expect (1).isNot (2)
-      },
-      'sample spec 1/3': {
-        'sample spec 1/3/1': {
-          'sample spec 1/3/1/1': () => {},
-          'sample spec 1/3/1/2': {},
-        }
-      },
-    },
-    'sample spec 2': async () => {},
-    'sample spec 3': () => {},
-  });
-
   run ();
 }
 

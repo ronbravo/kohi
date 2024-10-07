@@ -115,6 +115,36 @@ export async function run () {
   console.log (`- time(ms): [${time}]   start: [${start}] end: [${end}]`);
   // console.log (runner);
   // console.log (JSON.stringify (runner.root, null, 2))
+  await afterTests ();
+}
+
+async function afterTests () {
+  console.log ('- coverage:', window.__coverage__);
+  console.log ('- all done');
+  let reply;
+  try {
+    // reply = await fetch ('http://localhost:5001/status', {
+    // reply = await fetch ('http://localhost:5001/kohi/reporter/coverage', {
+    // reply = await fetch ('http://localhost:5000/kohi/reporter/coverage', {
+    // reply = await fetch ('http://localhost:5000/kohi/reporter/coverage', {
+    // reply = await fetch ('http://localhost:5001/a', {
+    // reply = await fetch ('http://localhost:5002/a', {
+    reply = await fetch ('/api/kohi/reporter/coverage', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify ({ coverage: window.__coverage__ }),
+    });
+    if (reply.status < 400) {
+      reply = await reply.json ();
+      console.log (reply);
+    }
+  }
+  catch (err) {
+    console.error (err);
+  }
 }
 
 async function runNextSpec (details = {}) {

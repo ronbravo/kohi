@@ -1,8 +1,20 @@
+import istanbul from 'vite-plugin-istanbul';
 import { defineConfig } from 'vite';
 import { fileURLToPath } from 'url';
 
 // https://vite.dev/config/
-export default defineConfig({
+export default defineConfig((config) => ({
+  build: {
+    sourcemap: config.mode === 'development' ? 'inline' : false,
+  },
+  plugins: [
+    istanbul ({
+      include: 'src/**/*.js',
+      exclude: ['node_modules', 'src/**/*.spec.js'],
+      extension: ['.js'],
+      forceBuildInstrument: true,
+    }),
+  ],
   publicDir: '../../../public',
   resolve: {
     alias: {
@@ -13,5 +25,8 @@ export default defineConfig({
   server: {
     host: true,
     port: 5000, 
+    proxy: {
+      '/api/kohi': 'http://localhost:5002',
+    },
   }
-})
+}));

@@ -9,7 +9,7 @@
   "type": "module",
   "scripts": {
     "bench": "cd bench && node index.js",
-    "bench:watch": "npx nodemon --exec \"pnpm run bench\" --watch index.js",
+    "bench:watch": "npx nodemon --exec \"pnpm run bench\" --watch src/js/common",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {

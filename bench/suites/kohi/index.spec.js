@@ -1,7 +1,31 @@
-import { describe, it, run } from 'kohi';
-import assert from 'assert';
+import { expect, run, specs } from 'kohi';
 import  math from '../../math.js';
 
+specs ({
+	'some group spec': {
+		// 'before all': () => {},
+		// 'before each': () => {},
+		// 'after all': () => {},
+		// 'after each': () => {},
+		'some sample spec 1': () => {
+			expect (1).is (1)
+		},
+		'some sample spec 2': async () => {
+			expect (1).isNot (2)
+		},
+		'some sample spec 3': {
+			'some child sample spec 3.1': {
+				'some sample spec': () => {},
+			}
+		},
+	},
+	'some sample spec 2': async () => {},
+	'some sample spec 3': () => {},
+})
+
+run()
+
+/*
 describe('sum', () => {
   it('should be a function', () => {
     assert.equal(typeof math.sum, 'function');
@@ -37,5 +61,4 @@ describe('mod', () => {
 		assert.equal(math.mod(7, 4), 3);
 	});
 });
-
-run()
+*/

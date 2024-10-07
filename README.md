@@ -2,7 +2,7 @@
 
 A very minimal spec framework to run primarily in the browser without any dependencies. Since this tool is built for modern ES6 browser environment it should work in a NodeJs context as well. The goal is to have a kohi test from the `/bench` folder run in under `100ms`. Kohi uses the [String Spec](https://kotest.io/docs/framework/testing-styles.html#string-spec) style of writing specs.
 
-# Resources
+## Resources
 
 - [luna-test](https://www.npmjs.com/package/luna-testing)
   - [Introducing Luna — JavaScript Testing Done Right](https://itnext.io/introducing-luna-javascript-testing-done-right-437a738cc1ed)

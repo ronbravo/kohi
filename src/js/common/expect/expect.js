@@ -18,4 +18,4 @@ function isNot (value) {
   throw new Error (`- expected values are NOT supposed to match`);
 }
 
-export const expect = createExpectation ()
+export const expect = createExpectation;

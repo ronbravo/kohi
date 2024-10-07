@@ -9,43 +9,59 @@ const TODO_RESULT   = 'todo';
 const DONE_STATUS   = 'done';
 const READY_STATUS  = 'ready';
 
+export function addChildSpec (details = {}) {
+  let { parent, spec } = details;
+  if (parent) {
+    if (parent.children === undefined) { 
+      parent.children = [];
+    }
+    parent.children.push (spec); 
+  }
+}
+
 export function createRunner () {
   let runner, root;
-  root = createSpec ({ name: 'root spec', isRoot: true });
+  root = createSpec ({ name: 'root spec', id: 1, isRoot: true });
   runner = {
     only: [],
+    registry: {},
     root,
+    idcounter: 1,
     stats: {
       fail: 0,
       pass: 0,
       todo: 0,
     },
-  }  
+  }
+  runner.registry [root.id] = root;
   return runner;
 }
 
 export function createSpec (details = {}) {
   let { 
-    target, 
+    target,
+    id = createId (),
     isRoot = false, 
     name = 'un-named spec', 
     parent = null,
+    runner = shared.runner ? getRunner () : null,
   } = details;
   let spec;
 
   spec = {
-    after: {
-      each: [],
-      list: [],
-    },
-    before: {
-      each: [],
-      list: [],
-    },
-    children: [],
+    // after: {
+    //   each: [],
+    //   list: [],
+    // },
+    // before: {
+    //   each: [],
+    //   list: [],
+    // },
+    // children: [],
+    id,
     isRoot,
     name,
-    parent,
+    parent: parent ? parent.id : 0,
     stats: {
       duration: 0,
       end: 0,
@@ -55,8 +71,21 @@ export function createSpec (details = {}) {
     status: READY_STATUS,
     target,
   }
-  if (parent) { parent.children.push (spec); }
+
+  addChildSpec ({ parent, spec })
+
+  if (runner) { 
+    runner.registry [spec.id] = spec 
+  }
   return spec;
+}
+
+export function createId () {
+  let id, runner;
+  runner = getRunner ();
+  id = runner.idcounter + 1;
+  runner.idcounter = runner.idcounter + 1;
+  return id;
 }
 
 export function getRunner () {
@@ -70,51 +99,87 @@ export function getRunner () {
 }
 
 export async function run () {
-  let runner;
+  let end, runner, seconds, start;
+
+  // Prepare the specs for running
+  start = Date.now ();
   runner = getRunner ();
+
+  // Run the specs
   await runNextSpec ({ 
     index: 0,
     list: [runner.root],
     runner, 
   });
   console.log ('- results:', runner.stats);
+  
+  // Show the results
+  end = Date.now ();
+  seconds = end - start;
+  console.log ('- seconds:', start, end, seconds);
+
+  console.log (runner);
+  // console.log (JSON.stringify (runner.root, null, 2))
 }
 
 async function runNextSpec (details = {}) {
   let { index, list, runner } = details;
-  let result, spec;
+  let result, spec, type;
   
   spec = list [index];
   details.index = details.index + 1;
   if (spec) {
-    console.log (`- run spec: ${spec.name}`)
+    // console.log (`- run spec: ${spec.name}`)
     if (spec.target) {
       try {
-        result = spec.target ();
-        if (result.constructor.name === 'Promise') {
-          result = await result;
+        type = spec.target.constructor.name;
+        
+        if (type === 'Function' || type === 'AsyncFunction') {
+          result = spec.target ();
+          if (result && result.constructor.name === 'Promise') {
+            result = await result;
+          }
+          runner.stats.pass = runner.stats.pass + 1;
+          spec.stats.status = PASS_RESULT;
         }
-        spec.stats.status = PASS_RESULT;
-        runner.stats.pass = runner.stats.pass + 1;
+        else if (type === 'Object') {
+          if (Object.keys (spec.target).length === 0) {
+            setSpecAsTodo ({ runner, spec });
+          }
+        }
+        else {
+          setSpecAsTodo ({ runner, spec });
+        }
       }
       catch (err) {
-        spec.stats.status = FAIL_RESULT;
         runner.stats.fail = runner.stats.fail + 1;
+        spec.stats.status = FAIL_RESULT;
+        console.error (`- FAIL: ${spec.name}`);
+        console.error (err);
       }
     }
     else {
-      runner.stats.todo = runner.stats.todo + 1;
+      setSpecAsTodo ({ runner, spec });
     }
 
     // Run the child specs
-    if (spec.children.length > 0) {
-      console.log ('- children:', spec.children.length);
+    if (spec.children && spec.children.length > 0) {
       await runNextSpec ({
         index: 0,
         list: spec.children,
         runner,
       });
     }
+
+    // Run the next sibling spec
+    await runNextSpec (details);
+  }
+}
+
+function setSpecAsTodo (details = {}) {
+  let { runner, spec } = details;
+  if (!spec.isRoot) {
+    runner.stats.todo = runner.stats.todo + 1;
   }
 }
 
@@ -139,9 +204,7 @@ export function specs (details = {}, parent) {
       if (type === 'Object') {
         specs (target, spec)
       }
-      else if (type === 'Function' || type === 'AsyncFunction') {
-        spec.target = target;
-      }
+      spec.target = target;
     }
   }
 }

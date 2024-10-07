@@ -6,9 +6,6 @@ const FAIL_RESULT   = 'fail';
 const PASS_RESULT   = 'pass';
 const TODO_RESULT   = 'todo';
 
-const DONE_STATUS   = 'done';
-const READY_STATUS  = 'ready';
-
 export function addChildSpec (details = {}) {
   let { parent, spec } = details;
   if (parent) {
@@ -68,7 +65,6 @@ export function createSpec (details = {}) {
       result: TODO_RESULT,
       start: 0,
     },
-    status: READY_STATUS,
     target,
   }
 
@@ -99,7 +95,7 @@ export function getRunner () {
 }
 
 export async function run () {
-  let end, runner, seconds, start;
+  let end, runner, start, time;
 
   // Prepare the specs for running
   start = Date.now ();
@@ -115,10 +111,9 @@ export async function run () {
   
   // Show the results
   end = Date.now ();
-  seconds = end - start;
-  console.log ('- seconds:', start, end, seconds);
-
-  console.log (runner);
+  time = end - start;
+  console.log (`- time(ms): [${time}]   start: [${start}] end: [${end}]`);
+  // console.log (runner);
   // console.log (JSON.stringify (runner.root, null, 2))
 }
 
@@ -129,7 +124,6 @@ async function runNextSpec (details = {}) {
   spec = list [index];
   details.index = details.index + 1;
   if (spec) {
-    // console.log (`- run spec: ${spec.name}`)
     if (spec.target) {
       try {
         type = spec.target.constructor.name;
@@ -175,6 +169,10 @@ async function runNextSpec (details = {}) {
     await runNextSpec (details);
   }
 }
+
+// function setSpecAsPass (details = {}) {}
+
+// function setSpecAsFail (details = {}) {}
 
 function setSpecAsTodo (details = {}) {
   let { runner, spec } = details;

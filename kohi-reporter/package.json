@@ -1,0 +1,21 @@
+{
+  "name": "kohi-reporter",
+  "version": "0.1.0",
+  "main": "index.js",
+  "keywords": [],
+  "author": "Ron Bravo",
+  "license": "MIT",
+  "description": "",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "less": "^4.2.0",
+    "vite": "^5.4.8"
+  },
+  "dependencies": {
+    "@shoelace-style/shoelace": "^2.17.1"
+  }
+}

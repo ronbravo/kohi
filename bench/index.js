@@ -18,12 +18,12 @@ const runners = {
 */
 
 const runners = [
-	//['npx', 'ava', '/index.spec.js'],
+  // ['npx', 'ava', '/index.spec.js'],
 	// ['jest', '/index.spec.js'],
-	//['npx', 'mocha', '/index.spec.js'],
+	// ['npx', 'mocha', '/index.spec.js'],
 	// ['tape', '/index.spec.js'],
-	// ['uvu', ''],
-	['node', 'kohi', '/index.spec.js'],
+	// ['npx', 'uvu', ''],
+	['node', '', 'kohi/index.spec.js'],
 ]
 
 function format(arr) {

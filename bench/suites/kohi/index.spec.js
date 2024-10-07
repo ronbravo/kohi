@@ -1,10 +1,10 @@
-import { describe, it } from 'kohi';
+import { describe, it, run } from 'kohi';
 import assert from 'assert';
 import  math from '../../math.js';
 
 describe('sum', () => {
   it('should be a function', () => {
-	assert.equal(typeof math.sum, 'function');
+    assert.equal(typeof math.sum, 'function');
   });
 
 	it('should compute result correctly', () => {
@@ -38,3 +38,4 @@ describe('mod', () => {
 	});
 });
 
+run()

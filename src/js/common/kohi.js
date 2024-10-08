@@ -121,20 +121,44 @@ export async function run () {
 async function afterTests () {
   console.log ('- coverage:', window.__coverage__);
   console.log ('- all done');
+  await checkApiStatus ();
+  await postCodeCoverage ();
+}
+
+async function checkApiStatus (details = {}) {
   let reply;
   try {
-    // reply = await fetch ('http://localhost:5001/status', {
-    // reply = await fetch ('http://localhost:5001/kohi/reporter/coverage', {
-    // reply = await fetch ('http://localhost:5000/kohi/reporter/coverage', {
-    // reply = await fetch ('http://localhost:5000/kohi/reporter/coverage', {
-    // reply = await fetch ('http://localhost:5001/a', {
-    // reply = await fetch ('http://localhost:5002/a', {
-    // reply = await fetch ('/api/kohi/reporter/coverage', {
-    const hash = Date.now ();
-    // const hash = 'abc';
-    
-    reply = await fetch ('http://localhost:9000/api/coverage/' + hash, {
+    reply = await fetch ('/api/kohi/reporter/coverage', {
+    // reply = await fetch ('/api/kohi/coverage/client', {
+    // reply = await fetch ('http://localhost:8888/coverage/client', {
+    // reply = await fetch ('/api/kohi/coverage/client', {
     // reply = await fetch ('/bob/api/coverage/' + Date.now (), {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      // body: JSON.stringify ( window.__coverage__ ),
+      body: JSON.stringify ({ coverage: window.__coverage__ }),
+    });
+    if (reply.status < 400) {
+      reply = await reply.json ();
+      console.log (reply);
+    }
+  }
+  catch (err) {
+    console.error (err);
+  }
+}
+
+async function postCodeCoverage (details = {}) {
+  let reply;
+  try {
+    // reply = await fetch ('/api/kohi/reporter/coverage', {
+    // // reply = await fetch ('/api/kohi/coverage/client', {
+    reply = await fetch ('http://localhost:8888/coverage/client', {
+    // // reply = await fetch ('/api/kohi/coverage/client', {
+    // // reply = await fetch ('/bob/api/coverage/' + Date.now (), {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -145,21 +169,6 @@ async function afterTests () {
     });
     if (reply.status < 400) {
         reply = await reply.json ();
-      console.log (reply);
-    }
-    
-    reply = await fetch ('http://localhost:9000/api/coverage/' + hash, {
-    // reply = await fetch ('/bob/api/coverage/' + Date.now (), {
-      method: 'GET',
-      // headers: {
-      //   'Accept': 'application/json',
-      //   'Content-Type': 'application/json',
-      // },
-      // body: JSON.stringify ( window.__coverage__ ),
-      // body: JSON.stringify ({ coverage: window.__coverage__ }),
-    });
-    if (reply.status < 400) {
-      reply = await reply.json ();
       console.log (reply);
     }
   }
@@ -257,3 +266,70 @@ export function specs (details = {}, parent) {
     }
   }
 }
+
+
+/*
+  // try {
+
+    // reply = await fetch ('http://localhost:5001/status', {
+    // reply = await fetch ('http://localhost:5001/kohi/reporter/coverage', {
+    // reply = await fetch ('http://localhost:5000/kohi/reporter/coverage', {
+    // reply = await fetch ('http://localhost:5000/kohi/reporter/coverage', {
+    // reply = await fetch ('http://localhost:5001/a', {
+    // reply = await fetch ('http://localhost:5002/a', {
+    // reply = await fetch ('/api/kohi/reporter/coverage', {
+    // const hash = Date.now ();
+    // const hash = 'abc';
+    
+    // reply = await fetch ('/api/kohi/reporter/coverage', {
+    // // reply = await fetch ('/api/kohi/coverage/client', {
+    // // reply = await fetch ('http://localhost:8888/coverage/client', {
+    // // reply = await fetch ('/api/kohi/coverage/client', {
+    // // reply = await fetch ('/bob/api/coverage/' + Date.now (), {
+    //   method: 'POST',
+    //   headers: {
+    //     'Accept': 'application/json',
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify ( window.__coverage__ ),
+    //   // body: JSON.stringify ({ coverage: window.__coverage__ }),
+    // });
+    // if (reply.status < 400) {
+    //     reply = await reply.json ();
+    //   console.log (reply);
+    // }
+
+    // reply = await fetch ('http://localhost:9000/api/coverage/' + hash, {
+    // // reply = await fetch ('/bob/api/coverage/' + Date.now (), {
+    //   method: 'POST',
+    //   headers: {
+    //     'Accept': 'application/json',
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify ( window.__coverage__ ),
+    //   // body: JSON.stringify ({ coverage: window.__coverage__ }),
+    // });
+    // if (reply.status < 400) {
+    //     reply = await reply.json ();
+    //   console.log (reply);
+    // }
+    
+    // reply = await fetch ('http://localhost:9000/api/coverage/' + hash, {
+    // // reply = await fetch ('/bob/api/coverage/' + Date.now (), {
+    //   method: 'GET',
+    //   // headers: {
+    //   //   'Accept': 'application/json',
+    //   //   'Content-Type': 'application/json',
+    //   // },
+    //   // body: JSON.stringify ( window.__coverage__ ),
+    //   // body: JSON.stringify ({ coverage: window.__coverage__ }),
+    // });
+    // if (reply.status < 400) {
+    //   reply = await reply.json ();
+    //   console.log (reply);
+    // }
+  // }
+  // catch (err) {
+  //   console.error (err);
+  // }
+*/

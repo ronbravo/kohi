@@ -3,6 +3,7 @@ import '@/common/index.spec.js';
 import './index.css';
 
 function start () {
+  console.log ('- started again 12345')
   run ();
 }
 

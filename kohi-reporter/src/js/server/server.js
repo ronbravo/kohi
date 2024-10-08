@@ -1,6 +1,7 @@
 import restana from 'restana';
 import cors from 'cors';
 import bodyParser from 'body-parser';
+import fs from 'fs-extra';
 
 export async function start () {
   let app, port;
@@ -17,7 +18,15 @@ export async function start () {
 }
 
 async function generateCoverageReport (req, res) {
-  console.log ('- got updated coverage...');
+  let { coverage } = req.body;
+  try {
+    // console.log ('- got updated coverage...', coverage);
+    console.log ('- saving coverage info...');
+    await fs.outputFile ('./_coverage.json', JSON.stringify (coverage ["/home/ronbravo/projects/kohi/src/js/common/expect/expect.js"], null, 2));
+  }
+  catch (err) {
+    console.error (err);
+  }
   res.send ({ status: 'ok' });
 }
 

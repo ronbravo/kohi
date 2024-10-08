@@ -129,13 +129,34 @@ async function afterTests () {
     // reply = await fetch ('http://localhost:5000/kohi/reporter/coverage', {
     // reply = await fetch ('http://localhost:5001/a', {
     // reply = await fetch ('http://localhost:5002/a', {
-    reply = await fetch ('/api/kohi/reporter/coverage', {
+    // reply = await fetch ('/api/kohi/reporter/coverage', {
+    const hash = Date.now ();
+    // const hash = 'abc';
+    
+    reply = await fetch ('http://localhost:9000/api/coverage/' + hash, {
+    // reply = await fetch ('/bob/api/coverage/' + Date.now (), {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify ({ coverage: window.__coverage__ }),
+      body: JSON.stringify ( window.__coverage__ ),
+      // body: JSON.stringify ({ coverage: window.__coverage__ }),
+    });
+    if (reply.status < 400) {
+        reply = await reply.json ();
+      console.log (reply);
+    }
+    
+    reply = await fetch ('http://localhost:9000/api/coverage/' + hash, {
+    // reply = await fetch ('/bob/api/coverage/' + Date.now (), {
+      method: 'GET',
+      // headers: {
+      //   'Accept': 'application/json',
+      //   'Content-Type': 'application/json',
+      // },
+      // body: JSON.stringify ( window.__coverage__ ),
+      // body: JSON.stringify ({ coverage: window.__coverage__ }),
     });
     if (reply.status < 400) {
       reply = await reply.json ();

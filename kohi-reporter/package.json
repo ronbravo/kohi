@@ -8,9 +8,9 @@
   "description": "",
   "type": "module",
   "scripts": {
+    "api": "node src/js/server/start.js",
     "dev": "vite",
-    "serve": "node src/js/server/start.js",
-    "serve:dev": "npx nodemon --exec \"pnpm run serve\" --watch src/js/server --wtach src/js/common",
+    "dev:api": "npx nodemon --exec \"pnpm run api\" --watch src/js/server --wtach src/js/common",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
@@ -21,7 +21,10 @@
   "dependencies": {
     "@shoelace-style/shoelace": "^2.17.1",
     "body-parser": "^1.20.3",
+    "c8": "^10.1.2",
     "cors": "^2.8.5",
+    "fs-extra": "^11.2.0",
+    "nyc": "^17.1.0",
     "restana": "^4.9.9"
   }
 }

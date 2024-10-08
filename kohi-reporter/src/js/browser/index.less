@@ -22,12 +22,22 @@ a:hover {
   color: #535bf2;
 }
 
+html {
+  // border: 10px solid red;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
 body {
+  // border: 10px solid blue;
+  box-sizing: border-box;
+  flex-direction: column;
   margin: 0;
   display: flex;
   place-items: center;
   min-width: 320px;
-  min-height: 100vh;
+  height: 100vh;
 }
 
 h1 {
@@ -36,10 +46,12 @@ h1 {
 }
 
 #app {
+  border: 10px solid green;
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  display: none;
 }
 
 .logo {
@@ -93,4 +105,11 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+// --------------------------------------------------------
+.main-app {
+  // border: 10px solid yellow;
+  box-sizing: border-box;
+  width: 100%;
 }

@@ -8,9 +8,9 @@ import { fileURLToPath } from 'url';
 import express from 'express';
 
 export async function start () {
-  let app, port;
+  let app, base, port;
 
-  port = 5002;
+  port = 5001;
   // app = restana ();
   app = express ();
   // app.use (cors ());
@@ -18,8 +18,14 @@ export async function start () {
   // let content = serveStatic (ASSETS_DIR);
   // console.log (content.toString ());
   // console.log ('- path:', join (fileURLToPath (import.meta.url), '../../../../', 'public'));
+  
+  base = join (fileURLToPath (import.meta.url), '../../../../');
+  if (process.platform === 'win32') {
+    base = join (import.meta.url.substring (8), '../../../../').replace (/\\/g, '/');
+    console.log ('base:', base);
+  }
 
-  app.use ('/static', serveStatic (join (fileURLToPath (import.meta.url), '../../../../', 'public')));
+  app.use ('/', serveStatic (join (fileURLToPath (import.meta.url), '../../../../', 'public')));
   app.use ('/asset', serveStatic (join (ASSETS_DIR)));
   app.use ('/asset', serveStatic (join (ASSETS_DIR, 'vendor')));
 
@@ -31,7 +37,7 @@ export async function start () {
   
   app.get ('/coverage', createShowCoverageReportHandler ({ app }));
 
-  app.post ('/api/kohi/reporter/coverage', createGenerateCoverageReportHandler ({ app }));
+  app.post ('/api/kohi/reporter/coverage', createGenerateCoverageReportHandler ({ app, base }));
 
   app.get ('/api/status', (req, res) => res.send ({ status: 'ok' }));
 
@@ -48,10 +54,11 @@ export async function start () {
 }
 
 function createGenerateCoverageReportHandler (details = {}) {
-  let { app } = details;
+  let { app, base } = details;
   return async function generateCoverageReport (req, res) {
     let { coverage } = req.body;
     try {
+      // console.log (req.body.base);
       console.log ('- got updated coverage:', Date.now ());
       mergeClientCoverage ({ obj: coverage });
   
@@ -145,6 +152,8 @@ function createShowCoverageReportHandler (details = {}) {
         // return res.send (html, 200, { 'Content-Type': 'text/html' });
       }
 
+      // <link rel="icon" type="image/x-icon" href="/image/favicon.ico">
+
       return res.end ();
       // html = '<h1>Hello Report World!</h1>';
       // return res.send (html, 200, { 'Content-Type': 'text/html' });
@@ -174,6 +183,7 @@ function mergeClientCoverage (details = {}) {
   coverage = getCoverageObject ();
 
   Object.keys (obj).forEach (function (filePath) {
+    // console.log ('- merging:', filePath);
     original = coverage [filePath];
     added = obj [filePath];
     

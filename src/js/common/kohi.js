@@ -119,15 +119,33 @@ export async function run () {
 }
 
 async function afterTests () {
-  console.log ('- coverage:', window.__coverage__);
   console.log ('- all done');
   await checkApiStatus ();
-  await postCodeCoverage ();
+  // await postCodeCoverage ();
 }
 
 async function checkApiStatus (details = {}) {
-  let reply;
+  let base, coverage, data, reply;
   try {
+    base = 'C:/Users/r-bravo/projects/kohi';
+    coverage = {};
+    data = window.__coverage__;
+
+    Object.keys (data).forEach ((key) => {
+      let index, value;
+      index = key.indexOf (base);
+      if (index > -1) {
+        value = data [key];
+        key = key.substring ((index + 1) + base.length);
+        // if (key [(key.length - 1)] === '/') {
+        //   key = substring (0, (key.length - 2));
+        // }
+        coverage [key] = value;
+        //   filePath = filePath.substring ((index + 1) + base.length);
+      }
+    });
+    console.log ('- coverage:', coverage);
+
     reply = await fetch ('/api/kohi/reporter/coverage', {
     // reply = await fetch ('/api/kohi/coverage/client', {
     // reply = await fetch ('http://localhost:8888/coverage/client', {
@@ -139,7 +157,11 @@ async function checkApiStatus (details = {}) {
         'Content-Type': 'application/json',
       },
       // body: JSON.stringify ( window.__coverage__ ),
-      body: JSON.stringify ({ coverage: window.__coverage__ }),
+      // body: JSON.stringify ({ coverage: window.__coverage__ }),
+      body: JSON.stringify ({
+        base,
+        coverage,
+      }),
     });
     if (reply.status < 400) {
       reply = await reply.json ();
@@ -164,7 +186,12 @@ async function postCodeCoverage (details = {}) {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify ( window.__coverage__ ),
+      body: JSON.stringify ({
+        name: 'bob',
+        age: 32,
+        base: 'C:/Users/r-bravo/projects/kohi',
+        // coverage: window.__coverage__
+      }),
       // body: JSON.stringify ({ coverage: window.__coverage__ }),
     });
     if (reply.status < 400) {

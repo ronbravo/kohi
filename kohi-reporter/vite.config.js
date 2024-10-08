@@ -12,6 +12,12 @@ export default defineConfig({
   root: 'src/js/browser',
   server: {
     host: true,
-    port: 5001, 
+    port: 5002,
+    proxy: {
+      // '/api/kohi': 'http://localhost:8888',
+      '/api/kohi': 'http://localhost:5001',
+      // '/coverage': 'http://localhost:5002',
+      // '/bob': 'http://localhost:9000',
+    }, 
   }
 })

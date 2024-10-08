@@ -27,6 +27,10 @@ function start () {
     </div>
   `
   setupCounter(document.querySelector('#counter'))
+
+  setTimeout (() => {
+    console.log ('- Get from api:');
+  }, 1000);
 }
 
 start ();

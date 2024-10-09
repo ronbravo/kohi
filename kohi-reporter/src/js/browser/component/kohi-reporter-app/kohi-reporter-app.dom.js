@@ -16,10 +16,10 @@ export class KohiReporterApp extends HTMLElement {
     // (can be called many times if an element is repeatedly added/removed)
 
     let data, dom, node, parent, template;
-    parent = this;
-    this.className = 'kohi-reporter-app component-host';
-    
-    dom = document.createElement ('div');
+    // parent = this;
+    // dom.className = 'kohi-reporter-app component-host';
+    // dom = document.createElement ('div');
+    dom = this;
     dom.className = 'kohi-reporter-app component';
     dom.innerHTML = html;
 
@@ -37,7 +37,7 @@ export class KohiReporterApp extends HTMLElement {
       ],
     }
     
-    node = bind (data, [dom, {
+    node = bind (data, [template, {
       cards: ['.stat.card', {
         label: '[data-domo="bind: label"]',
         total: '[data-domo="bind: total"]',
@@ -50,6 +50,8 @@ export class KohiReporterApp extends HTMLElement {
       data.time = Date.now ();
     }, 1000);
     
+    parent = dom.querySelector ('#summary-area');
+    console.log (parent);
     parent.appendChild (node);
   }
 }

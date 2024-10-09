@@ -7,25 +7,31 @@
 
 @border-color: darken(#fff, 15%);
 @max-width: 1200px;
+@label-margin: 2px;
 
-.kohi-reporter-app.component-host {
-  align-items: center;
-  // border: 10px solid blue;
-  box-sizing: border-box;
-  flex-grow: 2;
-  justify-content: center;
-}
+// .kohi-reporter-app.component-host {
+//   align-items: center;
+//   // border: 10px solid blue;
+//   box-sizing: border-box;
+//   flex-grow: 2;
+//   justify-content: center;
+// }
 .kohi-reporter-app.component {
-  @spacing: 8px;
-
   // border: 10px solid red;
   box-sizing: border-box;
+  flex-grow: 2;
+  height: 100vh;
+  max-width: @max-width;
+  overflow: hidden;
+}
+.kohi-reporter-app.component #summary-area.uk-active {
+  @spacing: 8px;
+
   display: grid;
   gap: @spacing;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(2, 1fr);
   margin: 0 auto;
-  max-width: @max-width;
   padding: @spacing;
 
   @media (min-width: @tablet) {
@@ -89,12 +95,12 @@
 }
 .kohi-reporter-app.component .uk-card .header .label {
   font-size: 16px;
-  margin-bottom: 4px;
+  margin-bottom: @label-margin;
   text-transform: capitalize;
 }
 .kohi-reporter-app.component .uk-card .body .total {
   font-size: 24px;
-  margin-bottom: 8px;
+  margin-bottom: @label-margin;
   text-align: right;
 }
 .kohi-reporter-app.component .uk-card.fail .body .total {

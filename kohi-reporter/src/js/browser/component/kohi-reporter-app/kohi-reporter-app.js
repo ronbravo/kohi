@@ -5,3 +5,16 @@ export function createComponent (details = {}) {
   component = {}
   return component;
 }
+
+import { SAMPLE_RUNNER_DATA } from './data.mock.js';
+
+const shared = {
+  runner: SAMPLE_RUNNER_DATA,
+}
+
+export function getItemFromRunnerRegistry (details = {}) {
+  let { id } = details;
+  let item;
+  item = shared.runner.registry [id];
+  return item;
+}

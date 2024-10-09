@@ -7,22 +7,22 @@ const PASS_RESULT   = 'pass';
 const TODO_RESULT   = 'todo';
 
 export function addChildSpec (details = {}) {
-  let { parent, spec } = details;
+  let { parent, spec, runner } = details;
+  parent = getById ({ id: parent, runner });
   if (parent) {
     if (parent.children === undefined) { 
       parent.children = [];
     }
-    parent.children.push (spec); 
+    parent.children.push (spec.id); 
   }
 }
 
 export function createRunner () {
   let runner, root;
-  root = createSpec ({ name: 'root spec', id: 1, isRoot: true });
   runner = {
     only: [],
     registry: {},
-    root,
+    root: null,
     idcounter: 1,
     stats: {
       fail: 0,
@@ -30,7 +30,10 @@ export function createRunner () {
       todo: 0,
     },
   }
+  if (!shared.runner) { shared.runner = runner; }
+  root = createSpec ({ name: 'root spec', id: 1, isRoot: true });
   runner.registry [root.id] = root;
+  runner.root = root.id;
   return runner;
 }
 
@@ -68,7 +71,7 @@ export function createSpec (details = {}) {
     target,
   }
 
-  addChildSpec ({ parent, spec })
+  addChildSpec ({ parent, runner, spec })
 
   if (runner) { 
     runner.registry [spec.id] = spec 
@@ -84,12 +87,17 @@ export function createId () {
   return id;
 }
 
+function getById (details = {}) {
+  let { id, runner = getRunner () } = details;
+  let item;
+  item = runner.registry [id];
+}
+
 export function getRunner () {
   let runner;
   runner = shared.runner;
   if (!runner) {
     runner = createRunner ();
-    shared.runner = runner;
   }
   return runner;
 }
@@ -115,6 +123,7 @@ export async function run () {
   console.log (`- time(ms): [${time}]   start: [${start}] end: [${end}]`);
   // console.log (runner);
   // console.log (JSON.stringify (runner, null, 2))
+  // console.log (JSON.stringify (runner.root, null, 2))
   await afterTests ();
 }
 
@@ -206,9 +215,11 @@ async function postCodeCoverage (details = {}) {
 
 async function runNextSpec (details = {}) {
   let { index, list, runner } = details;
-  let result, spec, type;
+  let id, result, spec, type;
   
-  spec = list [index];
+  id = list [index];
+  spec = getById ({ id, runner });
+  console.log ('HUH:', id, spec, runner.registry);
   details.index = details.index + 1;
   if (spec) {
     if (spec.target) {

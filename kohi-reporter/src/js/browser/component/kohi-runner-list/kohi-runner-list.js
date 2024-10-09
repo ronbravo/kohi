@@ -1,4 +1,4 @@
-export const KOHI_SPEC_LIST_TAG = 'kohi-spec-list';
+export const KOHI_RUNNER_LIST_TAG = 'kohi-runner-list';
 
 export function createComponent (details = {}) {
   let component;

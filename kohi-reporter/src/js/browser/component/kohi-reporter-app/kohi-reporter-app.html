@@ -1,22 +1,48 @@
-<!-- <div class="kohi-reporter-app component"> -->
+<ul uk-tab>
+  <li><a href="#">Summary</a></li>
+  <li><a href="#">Explore</a></li>
+  <li><a href="#">Isolated</a></li>
+</ul>
+<div class="uk-switcher uk-margin">
+  <div class="summary-area"></div>
+  <div class="explore-area">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
+  <div class="isolated-area">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</div>
+</div>
+
+<template id="card-template">
   <div class="uk-card uk-card-default uk-card-small uk-card-body stat card" data-domo="bind:">
     <div class="header">
       <h4 class="uk-card-title label" data-domo="bind: label">Stat</h4>
+      <span style="color: red">BOB</span>
     </div>
     <div class="body">
       <p class="total" data-domo="bind: total">52</p>
     </div>
     <div class="footer">
       <a href="#"><i class='bx bx-right-arrow-circle'></i></a>
-      <!-- <i class='bx bx-right-arrow-alt'></i> -->
-      <!-- <i class='bx bxs-right-arrow-square'></i> -->
-      <!-- <i class='bx bxs-right-arrow-circle' ></i> -->
     </div>
-    <!-- <p>time: 1234</p> -->
   </div>
-<!-- </div> -->
+</template>
 
-<!-- <div class="uk-card uk-card-default uk-card-body">
+<div class="uk-card uk-card-default uk-card-small uk-card-body stat card" data-domo="bind:">
+  <div class="header">
+    <h4 class="uk-card-title label" data-domo="bind: label">Stat</h4>
+  </div>
+  <div class="body">
+    <p class="total" data-domo="bind: total">52</p>
+  </div>
+  <div class="footer">
+    <a href="#"><i class='bx bx-right-arrow-circle'></i></a>
+  </div>
+</div>
+
+
+<!-- <i class='bx bx-right-arrow-alt'></i> -->
+<!-- <i class='bx bxs-right-arrow-square'></i> -->
+<!-- <i class='bx bxs-right-arrow-circle' ></i> -->
+<!-- <p>time: 1234</p> -->
+<!-- 
+<div class="uk-card uk-card-default uk-card-body">
   <h3 class="uk-card-title label">Default</h3>
   <span class="time"></span>
   <p>Lorem ipsum <a href="#">dolor</a> sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
@@ -25,9 +51,10 @@
     <div class="car">2</div>
     <div>3</div>
   </div>
-</div> -->
-
-<!-- <div class="uk-card uk-card-default kohi-app component">
+</div> 
+-->
+<!-- 
+<div class="uk-card uk-card-default kohi-app component">
   <div class="uk-card-header">
     <div class="uk-grid-small uk-flex-middle" uk-grid>
       <div class="uk-width-auto">
@@ -45,4 +72,5 @@
   <div class="uk-card-footer">
     <a href="#" class="uk-button uk-button-text">Read more</a>
   </div>
-</div> -->
+</div> 
+-->

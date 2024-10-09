@@ -1,1 +1,1 @@
-import './app/index.js';
+import './kohi-reporter-app/index.js';

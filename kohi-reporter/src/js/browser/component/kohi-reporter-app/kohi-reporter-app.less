@@ -1,0 +1,111 @@
+// Common Breakpoints
+// ref: https://www.browserstack.com/guide/responsive-design-breakpoints
+@desktop: 1280px;
+@tablet: 760px;
+@smartphone: 480px;
+@phone: 320px;
+
+@border-color: darken(#fff, 15%);
+@max-width: 1200px;
+
+.kohi-reporter-app.component-host {
+  align-items: center;
+  // border: 10px solid blue;
+  box-sizing: border-box;
+  flex-grow: 2;
+  justify-content: center;
+}
+.kohi-reporter-app.component {
+  @spacing: 8px;
+
+  // border: 10px solid red;
+  box-sizing: border-box;
+  display: grid;
+  gap: @spacing;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  margin: 0 auto;
+  max-width: @max-width;
+  padding: @spacing;
+
+  @media (min-width: @tablet) {
+    // background-color: red;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(1, 1fr);
+  }
+  @media (max-width: @phone) {
+    // background-color: green;
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    margin: initial;
+    max-width: 100vw;
+  }
+}
+.kohi-reporter-app.component .uk-card {
+  border: 1px solid @border-color;
+  box-sizing: border-box;
+  grid-column: 1 / 1;
+  grid-row: 1;
+}
+.kohi-reporter-app.component .uk-card.fail {
+  @media (max-width: @phone) {
+    grid-column: 1;
+    grid-row: 1;
+  }
+}
+.kohi-reporter-app.component .uk-card.pass {
+  grid-column: 2 / 2;
+  @media (min-width: @tablet) {
+    grid-column: 2;
+    grid-row: 1;
+  }
+  @media (max-width: @phone) {
+    grid-column: 1;
+    grid-row: 2;
+  }
+}
+.kohi-reporter-app.component .uk-card.todo {
+  grid-row: 2;
+  @media (min-width: @tablet) {
+    grid-column: 3;
+    grid-row: 1;
+  }
+  @media (max-width: @phone) {
+    grid-column: 1;
+    grid-row: 3;
+  }
+}
+.kohi-reporter-app.component .uk-card.total {
+  grid-column: 2 / 2;
+  grid-row: 2;
+  @media (min-width: @tablet) {
+    grid-column: 4;
+    grid-row: 1;
+  }
+  @media (max-width: @phone) {
+    grid-column: 1;
+    grid-row: 4;
+  }
+}
+.kohi-reporter-app.component .uk-card .header .label {
+  font-size: 16px;
+  margin-bottom: 4px;
+  text-transform: capitalize;
+}
+.kohi-reporter-app.component .uk-card .body .total {
+  font-size: 24px;
+  margin-bottom: 8px;
+  text-align: right;
+}
+.kohi-reporter-app.component .uk-card.fail .body .total {
+  color: red;
+}
+.kohi-reporter-app.component .uk-card.pass .body .total {
+  color: green;
+}
+.kohi-reporter-app.component .uk-card.todo .body .total {
+  color: blue;
+}
+.kohi-reporter-app.component .uk-card .footer {
+  font-size: 32px;
+}

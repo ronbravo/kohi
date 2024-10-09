@@ -1,7 +1,7 @@
 import bind from 'simulacra';
-import template from './app.html?raw';
+import html from './kohi-reporter-app.html?raw';
 import 'boxicons/css/boxicons.min.css';
-import './app.less';
+import './kohi-reporter-app.less';
 
 // Use the uikit library
 import UIkit from 'uikit';
@@ -11,30 +11,29 @@ import 'uikit/dist/css/uikit.min.css';
 UIkit.use (Icons);
 
 export class KohiReporterApp extends HTMLElement {
-  constructor () {
-    super ();    
-  }
-
   connectedCallback() {
     // browser calls this method when the element is added to the document
     // (can be called many times if an element is repeatedly added/removed)
 
-    let data, dom, node, parent;
+    let data, dom, node, parent, template;
     parent = this;
     this.className = 'kohi-reporter-app component-host';
     
     dom = document.createElement ('div');
     dom.className = 'kohi-reporter-app component';
-    dom.innerHTML = template;
+    dom.innerHTML = html;
+
+    template = dom.querySelector ('#card-template');
+    console.log (template);
 
     data = {
       label: 'Kohi Report',
       time: Date.now (),
       cards: [
-        { label: 'fail', total: 0 },
+        { label: 'fail', total: 10 },
         { label: 'pass', total: 100 },
         { label: 'todo', total: 100 },
-        { label: 'total', total: 300 },
+        { label: 'total', total: 210 },
       ],
     }
     

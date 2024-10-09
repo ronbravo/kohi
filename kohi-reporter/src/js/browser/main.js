@@ -1,3 +1,39 @@
+import bind from 'simulacra';
+import './index.less';
+
+const TEMPLATE = `
+<div>
+  <h3><span class="name"></span></h3>
+  <div><span class="time"></span></div>
+</div>
+`;
+
+function start () {
+  let data, dom, node, parent;
+  parent = document.querySelector ('#app');
+  dom = document.createElement ('div');
+  dom.innerHTML = TEMPLATE;
+
+  data = {
+    time: Date.now (),
+    name: 'Bob',
+  }
+  
+  node = bind (data, [dom, {
+    name: '.name',
+    time: '.time',
+  }]);
+  
+  setInterval (() => {
+    data.time = Date.now ();
+  }, 1000);
+  
+  parent.appendChild (node);
+}
+
+start ();
+
+/*
 import javascriptLogo from '/image/javascript.svg';
 import viteLogo from '/image/vite.svg';
 import { setupCounter } from './counter.js';
@@ -34,3 +70,4 @@ function start () {
 }
 
 start ();
+*/

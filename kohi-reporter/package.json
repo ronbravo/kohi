@@ -16,8 +16,7 @@
   "devDependencies": {
     "less": "^4.2.0",
     "nodemon": "^3.1.7",
-    "vite": "^5.4.8",
-    "vite-plugin-mix": "^0.4.0"
+    "vite": "^5.4.8"
   },
   "dependencies": {
     "@shoelace-style/shoelace": "^2.17.1",
@@ -31,6 +30,7 @@
     "istanbul-middleware": "^0.2.2",
     "nyc": "^17.1.0",
     "restana": "^4.9.9",
-    "serve-static": "^1.16.2"
+    "serve-static": "^1.16.2",
+    "simulacra": "^2.2.0"
   }
 }

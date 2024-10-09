@@ -1,16 +1,17 @@
-<ul uk-tab>
+<ul id="main-tab" uk-tab>
   <li><a href="#">Summary</a></li>
   <li><a href="#">Explore</a></li>
   <li><a href="#">Isolated</a></li>
 </ul>
 <div class="uk-switcher uk-margin">
   <div id="summary-area"></div>
-  <div id="explore-area">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
+  <div id="explore-area">
+  </div>
   <div id="isolated-area">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</div>
 </div>
 
 <template id="card-template">
-  <div class="uk-card uk-card-default uk-card-small uk-card-body stat card" data-domo="bind:">
+  <div class="uk-card uk-card-default uk-card-small uk-card-body stat card" data-domo="bind: card">
     <div class="header">
       <h4 class="uk-card-title label" data-domo="bind: label">Stat</h4>
     </div>
@@ -23,55 +24,36 @@
   </div>
 </template>
 
-<!-- 
-<div class="uk-card uk-card-default uk-card-small uk-card-body stat card" data-domo="bind:">
-  <div class="header">
-    <h4 class="uk-card-title label" data-domo="bind: label">Stat</h4>
-  </div>
-  <div class="body">
-    <p class="total" data-domo="bind: total">52</p>
-  </div>
-  <div class="footer">
-    <a href="#"><i class='bx bx-right-arrow-circle'></i></a>
-  </div>
-</div> 
--->
-
-
-<!-- <i class='bx bx-right-arrow-alt'></i> -->
-<!-- <i class='bx bxs-right-arrow-square'></i> -->
-<!-- <i class='bx bxs-right-arrow-circle' ></i> -->
-<!-- <p>time: 1234</p> -->
-<!-- 
-<div class="uk-card uk-card-default uk-card-body">
-  <h3 class="uk-card-title label">Default</h3>
-  <span class="time"></span>
-  <p>Lorem ipsum <a href="#">dolor</a> sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-  <div class="items">
-    <div>1</div>
-    <div class="car">2</div>
-    <div>3</div>
-  </div>
-</div> 
--->
-<!-- 
-<div class="uk-card uk-card-default kohi-app component">
-  <div class="uk-card-header">
-    <div class="uk-grid-small uk-flex-middle" uk-grid>
-      <div class="uk-width-auto">
-        <img class="uk-border-circle" width="40" height="40" src="https://getuikit.com/docs/images/avatar.jpg" alt="Avatar">
-      </div>
-      <div class="uk-width-expand">
-        <h3 class="uk-card-title uk-margin-remove-bottom label">Title</h3>
-        <p class="uk-text-meta uk-margin-remove-top"><time datetime="2016-04-01T19:00" class="time">April 01, 2016</time></p>
+<template id="specs-template">
+  <div data-domo="bind: specs">
+    <div data-domo="bind: runner">
+      <div data-domo="bind: root">
+        <span data-domo="bind: result"></span>
+        <h4 data-domo="bind: name"></h4>
       </div>
     </div>
+    <ul class="uk-nav-default" uk-nav="multiple: true">
+      <li class="uk-active"><a href="#">Active</a></li>
+      <li class="uk-parent">
+        <a href="#">Parent <span uk-nav-parent-icon></span></a>
+        <ul class="uk-nav-sub">
+          <li><a href="#">Sub item</a></li>
+          <li>
+            <a href="#">Sub item</a>
+            <ul>
+              <li><a href="#">Sub item</a></li>
+              <li><a href="#">Sub item</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li class="uk-parent">
+        <a href="#">Parent <span uk-nav-parent-icon></span></a>
+        <ul class="uk-nav-sub">
+          <li><a href="#">Sub item</a></li>
+          <li><a href="#">Sub item</a></li>
+        </ul>
+      </li>
+    </ul>
   </div>
-  <div class="uk-card-body">
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
-  </div>
-  <div class="uk-card-footer">
-    <a href="#" class="uk-button uk-button-text">Read more</a>
-  </div>
-</div> 
--->
+</template>

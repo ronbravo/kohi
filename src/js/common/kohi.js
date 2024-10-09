@@ -114,7 +114,7 @@ export async function run () {
   time = end - start;
   console.log (`- time(ms): [${time}]   start: [${start}] end: [${end}]`);
   // console.log (runner);
-  // console.log (JSON.stringify (runner.root, null, 2))
+  // console.log (JSON.stringify (runner, null, 2))
   await afterTests ();
 }
 

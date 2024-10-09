@@ -9,13 +9,10 @@
 @max-width: 1200px;
 @label-margin: 2px;
 
-// .kohi-reporter-app.component-host {
-//   align-items: center;
-//   // border: 10px solid blue;
-//   box-sizing: border-box;
-//   flex-grow: 2;
-//   justify-content: center;
-// }
+@error-color: #DB524B;
+@success-color: #58B957;
+@todo-color: #2499F3;
+ 
 .kohi-reporter-app.component {
   // border: 10px solid red;
   box-sizing: border-box;
@@ -104,14 +101,18 @@
   text-align: right;
 }
 .kohi-reporter-app.component .uk-card.fail .body .total {
-  color: red;
+  color: @error-color;
 }
 .kohi-reporter-app.component .uk-card.pass .body .total {
-  color: green;
+  color: @success-color;
 }
 .kohi-reporter-app.component .uk-card.todo .body .total {
-  color: blue;
+  color: @todo-color;
 }
 .kohi-reporter-app.component .uk-card .footer {
   font-size: 32px;
+}
+.kohi-reporter-app.component #explore-area .uk-nav-default li {
+  border: 1px solid red;
+  padding: 8px;
 }

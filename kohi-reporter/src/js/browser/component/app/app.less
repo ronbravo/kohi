@@ -1,0 +1,61 @@
+@border-color: darken(#fff, 15%);
+@max-width: 100%;
+
+// Common Breakpoints
+// ref: https://www.browserstack.com/guide/responsive-design-breakpoints
+@phone: 480px;
+@tablet: 760px;
+@desktop: 1280px;
+
+.kohi-report-app.component-host {
+  align-items: center;
+  // border: 10px solid blue;
+  box-sizing: border-box;
+  flex-grow: 2;
+  justify-content: center;
+
+  @media (min-width: 480px) {
+    background-color: red;
+  }
+}
+.kohi-report-app.component {
+  // border: 10px solid red;
+  box-sizing: border-box;
+  // display: flex;
+  // flex-wrap: wrap;
+  margin: 0 auto;
+  // width: 100vh;
+  // max-width: 320px;
+  min-width: @max-width;
+  // padding: 2rem;
+  // text-align: center;
+}
+.kohi-report-app.component .uk-card {
+  border: 1px solid @border-color;
+  // flex-grow: 1;
+  margin: 12px;
+  // min-width: 42%;
+}
+.kohi-report-app.component .uk-card .header .label {
+  font-size: 16px;
+  margin-bottom: 4px;
+  text-transform: capitalize;
+}
+.kohi-report-app.component .uk-card .body .total {
+  font-size: 24px;
+  margin-bottom: 8px;
+  text-align: right;
+}
+.kohi-report-app.component .uk-card.fail .body .total {
+  color: red;
+}
+.kohi-report-app.component .uk-card.pass .body .total {
+  color: green;
+}
+.kohi-report-app.component .uk-card.todo .body .total {
+  color: blue;
+}
+.kohi-report-app.component .uk-card .footer {
+  font-size: 32px;
+  // text-align: right;
+}

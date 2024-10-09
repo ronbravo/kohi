@@ -1,34 +1,13 @@
-import bind from 'simulacra';
+import './component/index.js';
 import './index.less';
 
-const TEMPLATE = `
-<div>
-  <h3><span class="name"></span></h3>
-  <div><span class="time"></span></div>
-</div>
-`;
-
 function start () {
-  let data, dom, node, parent;
+  let dom, parent;
   parent = document.querySelector ('#app');
-  dom = document.createElement ('div');
-  dom.innerHTML = TEMPLATE;
-
-  data = {
-    time: Date.now (),
-    name: 'Bob',
+  if (parent) {
+    dom = document.createElement ('kohi-report-app');  
+    parent.appendChild (dom);
   }
-  
-  node = bind (data, [dom, {
-    name: '.name',
-    time: '.time',
-  }]);
-  
-  setInterval (() => {
-    data.time = Date.now ();
-  }, 1000);
-  
-  parent.appendChild (node);
 }
 
 start ();

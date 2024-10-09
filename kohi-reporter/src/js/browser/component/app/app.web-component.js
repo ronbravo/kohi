@@ -10,7 +10,7 @@ import 'uikit/dist/css/uikit.min.css';
 
 UIkit.use (Icons);
 
-export class KohiReportApp extends HTMLElement {
+export class KohiReporterApp extends HTMLElement {
   constructor () {
     super ();    
   }
@@ -21,10 +21,10 @@ export class KohiReportApp extends HTMLElement {
 
     let data, dom, node, parent;
     parent = this;
-    this.className = 'kohi-report-app component-host';
+    this.className = 'kohi-reporter-app component-host';
     
     dom = document.createElement ('div');
-    dom.className = 'kohi-report-app component';
+    dom.className = 'kohi-reporter-app component';
     dom.innerHTML = template;
 
     data = {

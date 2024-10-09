@@ -5,7 +5,7 @@ function start () {
   let dom, parent;
   parent = document.querySelector ('#app');
   if (parent) {
-    dom = document.createElement ('kohi-report-app');  
+    dom = document.createElement ('kohi-reporter-app');  
     parent.appendChild (dom);
   }
 }

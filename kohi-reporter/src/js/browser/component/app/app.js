@@ -1,4 +1,4 @@
-export const KOHI_REPORT_APP_TAG = 'kohi-report-app';
+export const KOHI_REPORTER_APP_TAG = 'kohi-reporter-app';
 
 export function createComponent (details = {}) {
   let component;

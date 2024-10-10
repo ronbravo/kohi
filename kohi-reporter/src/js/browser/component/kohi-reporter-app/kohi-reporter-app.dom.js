@@ -49,57 +49,15 @@ export class KohiReporterApp extends HTMLElement {
       cards: ['[data-domo="bind: card"]', {
         label: '[data-domo="bind: label"]',
         total: '[data-domo="bind: total"]',
-      }, (element, value, previousValue) => {
+      }, (element, value) => {
         element.className = `${element.className} ${value.label}`; 
       }],
     }]);
     parent = dom.querySelector ('#summary-area');
-    console.log (parent);
     parent.appendChild (node);
-
-    /*
-    // Explore Specs Area
-    template = dom.querySelector ('#specs-template');
-    node = bind (data, [template, {
-      runner: ['[data-domo="bind: runner"]', {
-        root: ['[data-domo="bind: root"]', {
-          name: '[data-domo="bind: name"]',
-        }],
-      }],
-      // specs: ['[data-domo="bind: specs"]', {
-      //   name: '[data-domo="bind: name"]',
-      // }],
-    }]);
-    parent = dom.querySelector ('#explore-area');
-    console.log (parent);
-    parent.appendChild (node);
-    */
     
     // Set the current tab
     tabs = dom.querySelector ('#main-tab');
     UIkit.tab (tabs).show (1);
   }
 }
-
-/*
-  'sample spec 1': {
-    // 'before all': () => {},
-    // 'before each': () => {},
-    // 'after all': () => {},
-    // 'after each': () => {},
-    'sample spec 1/1': () => {
-      expect (1).is (1)
-    },
-    'sample spec 1/2': async () => {
-      expect (1).isNot (2)
-    },
-    'sample spec 1/3': {
-      'sample spec 1/3/1': {
-        'sample spec 1/3/1/1': () => {},
-        'sample spec 1/3/1/2': {},
-      }
-    },
-  },
-  'sample spec 2': async () => {},
-  'sample spec 3': () => {},
-*/

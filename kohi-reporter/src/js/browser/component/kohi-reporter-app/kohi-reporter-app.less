@@ -6,7 +6,8 @@
 @phone: 320px;
 
 @border-color: darken(#fff, 15%);
-@max-width: 1200px;
+// @max-width: 1200px;
+@max-width: 360px;
 @label-margin: 2px;
 
 @error-color: #DB524B;
@@ -15,6 +16,7 @@
  
 .kohi-reporter-app.component {
   // border: 10px solid red;
+  border: 1px solid @border-color;
   box-sizing: border-box;
   flex-grow: 2;
   height: 100vh;
@@ -112,7 +114,21 @@
 .kohi-reporter-app.component .uk-card .footer {
   font-size: 32px;
 }
-.kohi-reporter-app.component #explore-area .uk-nav-default li {
-  border: 1px solid red;
-  padding: 8px;
+// .kohi-reporter-app.component #explore-area .uk-nav-default li {
+//   border: 1px solid red;
+//   padding: 8px;
+// }
+.kohi-reporter-app.component {
+  display: flex;
+  flex-direction: column;
+}
+.kohi-reporter-app.component > .uk-tab {
+  // border: 10px solid green;
+  margin: 0;
+}
+.kohi-reporter-app.component > .uk-switcher {
+  // border: 10px solid red;
+  flex-grow: 2;
+  margin: 0;
+  overflow: auto;
 }

@@ -144,6 +144,7 @@ export const SAMPLE_RUNNER_DATA = {
       }
     }
   },
+  "name": "Spec Runner",
   "root": 1,
   "idcounter": 10,
   "stats": {

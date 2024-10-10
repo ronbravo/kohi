@@ -79,6 +79,7 @@ export function createRunner () {
     registry: {},
     root: null,
     idcounter: 1,
+    name: 'Spec Runner',
     stats: {
       fail: 0,
       pass: 0,
@@ -114,7 +115,6 @@ export function createSpec (details = {}) {
     // },
     // children: [],
     id,
-    isRoot,
     name,
     parent: parent ? parent : 0,
     stats: {
@@ -125,6 +125,8 @@ export function createSpec (details = {}) {
     },
     target,
   }
+
+  if (isRoot) { spec.isRoot = isRoot; }
 
   addChildSpec ({ parent, runner, spec })
 

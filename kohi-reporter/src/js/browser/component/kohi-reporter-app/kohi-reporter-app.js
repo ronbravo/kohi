@@ -1,11 +1,5 @@
 export const KOHI_REPORTER_APP_TAG = 'kohi-reporter-app';
 
-export function createComponent (details = {}) {
-  let component;
-  component = {}
-  return component;
-}
-
 import { SAMPLE_RUNNER_DATA } from './data.mock.js';
 
 const shared = {
@@ -17,4 +11,11 @@ export function getItemFromRunnerRegistry (details = {}) {
   let item;
   item = shared.runner.registry [id];
   return item;
+}
+
+export function getRunnerById (details = {}) {
+  let { id } = details;
+  let runner;
+  runner = shared.runner;
+  return runner;
 }

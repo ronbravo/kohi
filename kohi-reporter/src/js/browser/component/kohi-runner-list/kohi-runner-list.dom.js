@@ -5,12 +5,23 @@ import { getItemFromRunnerRegistry } from '../kohi-reporter-app/kohi-reporter-ap
 
 export class KohiRunnerList extends HTMLElement {
   connectedCallback() {
-    let data, dom, node, parent, tabs, template;
+    let data, dom, node, parent, template;
     dom = this;
     dom.className = 'kohi-runner-list component';
     dom.innerHTML = html;
 
     data = getItemFromRunnerRegistry ({ id: 1 });
-    console.log ('DATA:', data);
+    // console.log ('DATA:', data);
+    
+//    template = dom.querySelector ('#runner-template');
+//    node = bind (data, [template, {
+//      name: '[data-domo="bind: name"]',
+//    }]);
+    template = dom.querySelector ('#runner-template');
+    node = bind (data, [this, {
+      id: '[data-domo="bind: id"]',
+    }]);
+//    parent = dom.querySelector ('#runner-area');
+//    parent.appendChild (node);
   }
 }

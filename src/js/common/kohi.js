@@ -17,116 +17,6 @@ export function addChildSpec (details = {}) {
   }
 }
 
-export function createRunner () {
-  let runner, root;
-  runner = {
-    only: [],
-    registry: {},
-    root: null,
-    idcounter: 1,
-    stats: {
-      fail: 0,
-      pass: 0,
-      todo: 0,
-    },
-  }
-  if (!shared.runner) { shared.runner = runner; }
-  root = createSpec ({ name: 'root spec', id: 1, isRoot: true });
-  runner.registry [root.id] = root;
-  runner.root = root.id;
-  return runner;
-}
-
-export function createSpec (details = {}) {
-  let { 
-    target,
-    id = createId (),
-    isRoot = false, 
-    name = 'un-named spec', 
-    parent = null,
-    runner = shared.runner ? getRunner () : null,
-  } = details;
-  let spec;
-
-  spec = {
-    // after: {
-    //   each: [],
-    //   list: [],
-    // },
-    // before: {
-    //   each: [],
-    //   list: [],
-    // },
-    // children: [],
-    id,
-    isRoot,
-    name,
-    parent: parent ? parent.id : 0,
-    stats: {
-      duration: 0,
-      end: 0,
-      result: TODO_RESULT,
-      start: 0,
-    },
-    target,
-  }
-
-  addChildSpec ({ parent, runner, spec })
-
-  if (runner) { 
-    runner.registry [spec.id] = spec 
-  }
-  return spec;
-}
-
-export function createId () {
-  let id, runner;
-  runner = getRunner ();
-  id = runner.idcounter + 1;
-  runner.idcounter = runner.idcounter + 1;
-  return id;
-}
-
-function getById (details = {}) {
-  let { id, runner = getRunner () } = details;
-  let item;
-  item = runner.registry [id];
-}
-
-export function getRunner () {
-  let runner;
-  runner = shared.runner;
-  if (!runner) {
-    runner = createRunner ();
-  }
-  return runner;
-}
-
-export async function run () {
-  let end, runner, start, time;
-
-  // Prepare the specs for running
-  start = Date.now ();
-  runner = getRunner ();
-
-  // Run the specs
-  await runNextSpec ({ 
-    index: 0,
-    list: [runner.root],
-    runner, 
-  });
-  console.log ('- results:', runner.stats);
-  
-  // Show the results
-  end = Date.now ();
-  time = end - start;
-  console.log (`- time(ms): [${time}]   start: [${start}] end: [${end}]`);
-  // console.log (runner);
-  // console.log (JSON.stringify (runner, null, 2))
-  // console.log (JSON.stringify (runner.root, null, 2))
-  await afterTests ();
-}
-
 async function afterTests () {
   console.log ('- all done');
   await checkApiStatus ();
@@ -182,6 +72,93 @@ async function checkApiStatus (details = {}) {
   }
 }
 
+export function createRunner () {
+  let runner, root;
+  runner = {
+    only: [],
+    registry: {},
+    root: null,
+    idcounter: 1,
+    stats: {
+      fail: 0,
+      pass: 0,
+      todo: 0,
+    },
+  }
+  if (!shared.runner) { shared.runner = runner; }
+  root = createSpec ({ name: 'root spec', id: 1, isRoot: true });
+  runner.registry [root.id] = root;
+  runner.root = root.id;
+  return runner;
+}
+
+export function createSpec (details = {}) {
+  let { 
+    target,
+    id = createId (),
+    isRoot = false, 
+    name = 'un-named spec', 
+    parent = null,
+    runner = shared.runner ? getRunner () : null,
+  } = details;
+  let spec;
+
+  spec = {
+    // after: {
+    //   each: [],
+    //   list: [],
+    // },
+    // before: {
+    //   each: [],
+    //   list: [],
+    // },
+    // children: [],
+    id,
+    isRoot,
+    name,
+    parent: parent ? parent : 0,
+    stats: {
+      duration: 0,
+      end: 0,
+      result: TODO_RESULT,
+      start: 0,
+    },
+    target,
+  }
+
+  addChildSpec ({ parent, runner, spec })
+
+  if (runner) { 
+    runner.registry [spec.id] = spec 
+  }
+  spec.toJSON = specToJson;
+  return spec;
+}
+
+export function createId () {
+  let id, runner;
+  runner = getRunner ();
+  id = runner.idcounter + 1;
+  runner.idcounter = runner.idcounter + 1;
+  return id;
+}
+
+function getById (details = {}) {
+  let { id, runner = getRunner () } = details;
+  let item;
+  item = runner.registry [id];
+  return item;
+}
+
+export function getRunner () {
+  let runner;
+  runner = shared.runner;
+  if (!runner) {
+    runner = createRunner ();
+  }
+  return runner;
+}
+
 async function postCodeCoverage (details = {}) {
   let reply;
   try {
@@ -204,7 +181,7 @@ async function postCodeCoverage (details = {}) {
       // body: JSON.stringify ({ coverage: window.__coverage__ }),
     });
     if (reply.status < 400) {
-        reply = await reply.json ();
+      reply = await reply.json ();
       console.log (reply);
     }
   }
@@ -213,13 +190,38 @@ async function postCodeCoverage (details = {}) {
   }
 }
 
+export async function run () {
+  let end, runner, start, time;
+
+  // Prepare the specs for running
+  start = Date.now ();
+  runner = getRunner ();
+  
+  // Run the specs
+  await runNextSpec ({ 
+    index: 0,
+    list: [runner.root],
+    runner, 
+  });
+  console.log ('- results:', runner.stats);
+  
+  // Show the results
+  end = Date.now ();
+  time = end - start;
+  console.log (`- time(ms): [${time}]   start: [${start}] end: [${end}]`);
+  // console.log (runner);
+  // console.log (JSON.stringify (runner, null, 2))
+  // console.log (JSON.stringify (runner.root, null, 2))
+  await afterTests ();
+}
+
 async function runNextSpec (details = {}) {
   let { index, list, runner } = details;
   let id, result, spec, type;
   
-  id = list [index];
+  id = list [index];  
   spec = getById ({ id, runner });
-  console.log ('HUH:', id, spec, runner.registry);
+  //  console.log ('HUH:', id, spec, runner.registry);
   details.index = details.index + 1;
   if (spec) {
     if (spec.target) {
@@ -298,13 +300,19 @@ export function specs (details = {}, parent) {
     if (target) {
       type = target.constructor.name;
       if (type === 'Object') {
-        specs (target, spec)
+        specs (target, spec.id)
       }
       spec.target = target;
     }
   }
 }
 
+function specToJson () {
+  let json;
+  json = { ...this }
+  delete json.target;
+  return json;
+}
 
 /*
   // try {

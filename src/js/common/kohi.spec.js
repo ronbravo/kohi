@@ -2,10 +2,10 @@ import { expect, specs } from '@/common/index.js';
 
 specs ({
   'sample spec 1': {
-    // 'before all': () => {},
-    // 'before each': () => {},
-    // 'after all': () => {},
-    // 'after each': () => {},
+//    // 'before all': () => {},
+//    // 'before each': () => {},
+//    // 'after all': () => {},
+//    // 'after each': () => {},
     'sample spec 1/1': () => {
       expect (1).is (1)
     },

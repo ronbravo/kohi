@@ -29,13 +29,6 @@ export const SAMPLE_RUNNER_DATA = {
         "result": "todo",
         "start": 0
       },
-      "target": {
-        "sample spec 1/3": {
-          "sample spec 1/3/1": {
-            "sample spec 1/3/1/2": {}
-          }
-        }
-      },
       "children": [
         3,
         4,
@@ -79,11 +72,6 @@ export const SAMPLE_RUNNER_DATA = {
         "result": "todo",
         "start": 0
       },
-      "target": {
-        "sample spec 1/3/1": {
-          "sample spec 1/3/1/2": {}
-        }
-      },
       "children": [
         6
       ]
@@ -98,9 +86,6 @@ export const SAMPLE_RUNNER_DATA = {
         "end": 0,
         "result": "todo",
         "start": 0
-      },
-      "target": {
-        "sample spec 1/3/1/2": {}
       },
       "children": [
         7,
@@ -130,8 +115,7 @@ export const SAMPLE_RUNNER_DATA = {
         "end": 0,
         "result": "todo",
         "start": 0
-      },
-      "target": {}
+      }
     },
     "9": {
       "id": 9,
@@ -160,23 +144,7 @@ export const SAMPLE_RUNNER_DATA = {
       }
     }
   },
-  "root": {
-    "id": 1,
-    "isRoot": true,
-    "name": "root spec",
-    "parent": 0,
-    "stats": {
-      "duration": 0,
-      "end": 0,
-      "result": "todo",
-      "start": 0
-    },
-    "children": [
-      2,
-      9,
-      10
-    ]
-  },
+  "root": 1,
   "idcounter": 10,
   "stats": {
     "fail": 0,

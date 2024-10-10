@@ -57,6 +57,7 @@ export class KohiReporterApp extends HTMLElement {
     console.log (parent);
     parent.appendChild (node);
 
+    /*
     // Explore Specs Area
     template = dom.querySelector ('#specs-template');
     node = bind (data, [template, {
@@ -72,7 +73,8 @@ export class KohiReporterApp extends HTMLElement {
     parent = dom.querySelector ('#explore-area');
     console.log (parent);
     parent.appendChild (node);
-
+    */
+    
     // Set the current tab
     tabs = dom.querySelector ('#main-tab');
     UIkit.tab (tabs).show (1);

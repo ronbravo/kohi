@@ -69,7 +69,8 @@ function createClickHandler (details = {}) {
     parent = dom.parentNode.querySelector ('.body');
     if (!dom.classList.contains ('open')) {
       frame = document.createElement ('iframe');
-      frame.src = 'https://boxicons.com/?query=info';
+      frame.className = 'code-iframe';
+      frame.src = 'http://localhost:5001/coverage';
       if (parent) {
         parent.appendChild (frame);
       }

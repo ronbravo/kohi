@@ -39,19 +39,27 @@
 }
 
 @spacing: 8px;
-.kohi-reporter-app.component > .body .specs-area {
+.kohi-reporter-app.component > .body > .area {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 2;
+  max-width: 50%;
+  overflow: auto;
+
+  & > h3 {
+    font-size: 14px;
+    font-weight: bold;
+    margin: 4px;
+  }
+}
+.kohi-reporter-app.component > .body .specs.area {
   border: 0px solid red;
   border-right: 1px solid @border-color;
-  box-sizing: border-box;
-  flex-grow: 2;
-  max-width: 50%;
   padding: @spacing;
 }
-.kohi-reporter-app.component > .body .coverage-area {
+.kohi-reporter-app.component > .body .coverage.area {
   border: 0px solid blue;
-  box-sizing: border-box;
-  flex-grow: 2;
-  max-width: 50%;
   padding: @spacing;
 }
 // .kohi-reporter-app.component #summary-area.uk-active {

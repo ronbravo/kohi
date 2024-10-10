@@ -1,26 +1,21 @@
-<ul id="main-tab" uk-tab>
-  <li><a href="#">Summary</a></li>
-  <li><a href="#">Explore</a></li>
-  <li><a href="#">Isolated</a></li>
-</ul>
-<div class="uk-switcher">
-  <div id="summary-area"></div>
-  <div id="explore-area">
+<div id="summary-area" class="header"></div>
+<div class="body">
+  <div class="specs-area">
+    <h3>Specs</h3>
     <kohi-runner-list data-id="1"></kohi-runner-list>
   </div>
-  <div id="isolated-area">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</div>
+  <div class="coverage-area">
+    <h3>Coverage</h3>
+  </div>
 </div>
 
 <template id="card-template">
   <div class="uk-card uk-card-default uk-card-small uk-card-body stat card" data-domo="bind: card">
     <div class="header">
-      <h4 class="uk-card-title label" data-domo="bind: label">Stat</h4>
+      <h4 class="uk-card-title label" data-domo="bind: label"></h4>
     </div>
     <div class="body">
-      <p class="total" data-domo="bind: total">52</p>
-    </div>
-    <div class="footer">
-      <a href="#"><i class='bx bx-right-arrow-circle'></i></a>
+      <p class="total" data-domo="bind: total"></p>
     </div>
   </div>
 </template>

@@ -56,8 +56,8 @@ export class KohiReporterApp extends HTMLElement {
     parent = dom.querySelector ('#summary-area');
     parent.appendChild (node);
     
-    // Set the current tab
-    tabs = dom.querySelector ('#main-tab');
-    UIkit.tab (tabs).show (1);
+    // // Set the current tab
+    // tabs = dom.querySelector ('#main-tab');
+    // UIkit.tab (tabs).show (1);
   }
 }

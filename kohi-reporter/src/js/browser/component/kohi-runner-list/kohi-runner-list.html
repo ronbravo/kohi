@@ -1,48 +1,8 @@
 <template class="runner-template">
   <h2 class="name" data-domo="bind: name"></h2>
-  <div>
-    <button class="uk-button uk-button-default uk-width-1-1" type="button">
-      <span>< Back</span>
-    </button>
-    <div uk-dropdown="mode: click">
-      <ul class="">
-        <li>Root</li>
-        <li>Item 1</li>
-        <li>Item 1.1</li>
-        <li>Item 1.1.1</li>
-        <li>Item 1.1.1.1</li>
-      </ul>
-    </div>
-  </div>
-  <ul>
+  <ul class="root-spec">
     <li>
       <kohi-spec-list-item data-domo="bind: root"></kohi-spec-list-item>
     </li>
   </ul>
 </template>
-
-<!--
-<div>
-  <h1>This is the Runner!</h1>
-  <div id="runner-area"></div>
-  <kohi-spec-list-item data-domo="bind: id"></kohi-spec-list-item>
-  <kohi-spec-list-item data-id="4"></kohi-spec-list-item>
-</div>
-<div class="uk-width-1-2@s uk-width-2-5@m">
-  <ul class="uk-nav uk-nav-default">
-    <li class="uk-active"><a href="#">Active</a></li>
-    <li><a href="#">Item</a></li>
-    <li><a href="#">Item</a></li>
-  </ul>
-</div>
--->
-<!--
-<template id="runner-template">
-  <h4 data-domo="bind: name"></h4>
-  <ul class="uk-nav uk-nav-default">
-    <li class="uk-active"><a href="#">Active</a></li>
-    <li><a href="#">Item</a></li>
-    <li><a href="#">Item</a></li>
-  </ul>
-</template>
--->

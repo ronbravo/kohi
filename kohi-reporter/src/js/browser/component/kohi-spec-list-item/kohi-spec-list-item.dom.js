@@ -25,17 +25,19 @@ export class KohiSpecListItem extends HTMLElement {
     data = dom.component.data;
     template = this.querySelector ('.spec-template');
     node = bind (data, [template, {
-      name: '[data-domo="bind: name"]',
+      name: ['[data-domo="bind: name"]', (element) => {
+        setTimeout (() => {
+          createClickHandler ({ dom: element.parentNode });
+        }, 1)
+      }],
       children: ['[data-domo="bind: child-spec"]', (element, value) => {
         let item;
 
         item = document.createElement ('kohi-spec-list-item');
         item.setAttribute ('data-id', value);
-        // item.textContent = value;
 
         element.setAttribute ('data-spec-id', value);
         element.appendChild (item);
-        // console.log (value);
       }],
       // {
       //   // name: '[data-domo="bind: name"]',
@@ -65,4 +67,26 @@ export class KohiSpecListItem extends HTMLElement {
       }
     }
   }
+}
+
+function createClickHandler (details = {}) {
+  let { dom } = details;
+  dom.addEventListener ('click', function clickHandler () {
+    let frame, parent;
+    
+    parent = dom.parentNode.querySelector ('.body');
+    if (!dom.classList.contains ('open')) {
+      frame = document.createElement ('iframe');
+      frame.src = 'https://boxicons.com/?query=info';
+      if (parent) {
+        parent.appendChild (frame);
+      }
+      console.log ('cool...', );
+    }
+    else {
+      frame = parent.querySelector ('iframe');
+      parent.remove (frame);
+    }
+    dom.classList.toggle ('open');
+  });
 }

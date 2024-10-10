@@ -1,8 +1,48 @@
+@error-color: #DB524B;
+@success-color: #58B957;
+@todo-color: #2499F3;
+
+.kohi-spec-list-item.component .header.open {
+  border: 1px solid red;
+}
+.kohi-spec-list-item.component .header {
+  align-items: center;
+  border-top: 1px dotted darken(#fff, 50%);
+  display: flex;
+  justify-content: flex-start;
+  padding: 4px 8px;
+}
+.kohi-spec-list-item.component .header:hover {
+  background-color: darken(#fff, 7%);
+  cursor: pointer;
+}
+.kohi-spec-list-item.component .header i {
+  color: red;
+  margin-right: 12px;
+  &.fail { color: @error-color; }
+  &.success { color: @success-color; }
+  &.todo { color: @todo-color; }
+}
 .kohi-spec-list-item.component .name {
-  // font-size: 16px;
+  font-size: 12px;
   display: inline-block;
   margin: 0;
+  user-select: none; /* Standard syntax */
 }
 .kohi-spec-list-item.component ul {
+  list-style: none;
   margin: 0;
 }
+.kohi-spec-list-item.component li {
+  // border-top: 1px solid red;
+  // padding-bottom: 48px;
+}
+// .kohi-spec-list-item.component li .name {
+//   border-top: 1px dotted darken(#fff, 50%);
+//   display: block;
+//   padding: 4px 8px;
+// }
+// .kohi-spec-list-item.component li .name:hover {
+//   background-color: darken(#fff, 7%);
+//   cursor: pointer;
+// }

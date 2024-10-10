@@ -1,10 +1,10 @@
 import bind from 'simulacra';
-import html from './kohi-runner-list.html?raw';
-import './kohi-runner-list.less';
+import html from './kohi-coverage-list.html?raw';
+import './kohi-coverage-list.less';
 import { getRunnerById } from '../kohi-reporter-app/kohi-reporter-app.js';
 import { createComponent } from '../componet.js';
 
-export class KohiRunnerList extends HTMLElement {
+export class KohiCoverageList extends HTMLElement {
   static get observedAttributes() {
     return ['data-id'];
   }
@@ -19,11 +19,11 @@ export class KohiRunnerList extends HTMLElement {
     let dom;
 
     dom = this;
-    dom.className = 'kohi-runner-list component';
+    dom.className = 'kohi-coverage-list component';
     dom.innerHTML = html;
 
     data = dom.component.data;
-    template = this.querySelector ('.runner-template');
+    template = this.querySelector ('.coverage-template');
     node = bind (data, [template, {
       name: '[data-domo="bind: name"]',
       root: ['[data-domo="bind: root"]', (element, value) => {

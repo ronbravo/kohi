@@ -1,10 +1,10 @@
 import bind from 'simulacra';
-import html from './kohi-spec-list-item.html?raw';
-import './kohi-spec-list-item.less';
+import html from './kohi-file-list-item.html?raw';
+import './kohi-file-list-item.less';
 import { getItemFromRunnerRegistry } from '../kohi-reporter-app/kohi-reporter-app';
 import { createComponent } from '../componet.js';
 
-export class KohiSpecListItem extends HTMLElement {
+export class KohiFileListItem extends HTMLElement {
   static get observedAttributes() {
     return ['data-id'];
   }
@@ -19,24 +19,24 @@ export class KohiSpecListItem extends HTMLElement {
     let dom;
 
     dom = this;
-    dom.className = 'kohi-spec-list-item component';
+    dom.className = 'kohi-file-list-item component';
     dom.innerHTML = html;
 
     data = dom.component.data;
-    template = this.querySelector ('.spec-template');
+    template = this.querySelector ('.file-template');
     node = bind (data, [template, {
       name: ['[data-domo="bind: name"]', (element) => {
         setTimeout (() => {
           createClickHandler ({ dom: element.parentNode });
         }, 1)
       }],
-      children: ['[data-domo="bind: child-spec"]', (element, value) => {
+      children: ['[data-domo="bind: child-file"]', (element, value) => {
         let item;
 
-        item = document.createElement ('kohi-spec-list-item');
+        item = document.createElement ('kohi-file-list-item');
         item.setAttribute ('data-id', value);
 
-        element.setAttribute ('data-spec-id', value);
+        element.setAttribute ('data-file-id', value);
         element.appendChild (item);
       }],
     }]);

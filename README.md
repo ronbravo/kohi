@@ -19,3 +19,4 @@ A very minimal spec framework to run primarily in the browser without any depend
 - [riteway](https://github.com/paralleldrive/riteway)
   - [Rethinking Unit Test Assertions](https://medium.com/javascript-scene/rethinking-unit-test-assertions-55f59358253f)
 - [What's the difference between tests and specs?](https://stackoverflow.com/questions/16802030/whats-the-difference-between-tests-and-specs) - A stackoverflow discussion on the difference between the two
+- [Selenium Webdriver Bidi](https://github.com/lana-20/selenium-webdriver-bidi)

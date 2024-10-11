@@ -22,3 +22,9 @@ specs ({
   'sample spec 2': async () => {},
   'sample spec 3': () => {},
 });
+
+/*
+- Instead of trying to write a feature file (gherkin) to some auto generated test
+  - It might be better to go from a spec to a gherkin / feature file
+  - 
+*/

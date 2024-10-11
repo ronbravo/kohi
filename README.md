@@ -2,6 +2,7 @@
 
 A very minimal spec framework to run primarily in the browser without any dependencies. Since this tool is built for modern ES6 browser environment it should work in a NodeJs context as well. The goal is to have a kohi test from the `/bench` folder run in under `100ms`. Kohi uses the [String Spec](https://kotest.io/docs/framework/testing-styles.html#string-spec) style of writing specs.
 
+
 ## NOTE
 
 - The reporter has to work in CI / CD pipelines. 
